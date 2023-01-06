@@ -65,7 +65,7 @@ class GameApplication {
 				->setMaxHealth(75)
 				->setBaseDamage(9)
 				->setArmorType('shield')
-				->setAttackType('fire_bolt') //TODO re-add bow
+				->setAttackType('fire_bolt', 'bow')
 				->buildCharacter(),
 			default => throw new \RuntimeException('Undefined Character'),
 		};

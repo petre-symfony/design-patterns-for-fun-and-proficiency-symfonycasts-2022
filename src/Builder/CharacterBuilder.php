@@ -9,13 +9,14 @@ use App\ArmorType\ShieldType;
 use App\AttackType\AttackType;
 use App\AttackType\BowType;
 use App\AttackType\FireboltType;
+use App\AttackType\MultiAttackType;
 use App\AttackType\TwoHandedSwordType;
 use App\Character\Character;
 
 class CharacterBuilder {
 	private int $maxHealth;
 	private int $baseDamage;
-	private string $attackType;
+	private array $attackTypes;
 	private string $armorType;
 
 	public function setMaxHealth(int $maxHealth): self {
@@ -30,8 +31,8 @@ class CharacterBuilder {
 		return $this;
 	}
 
-	public function setAttackType(string $attackType): self {
-		$this->attackType = $attackType;
+	public function setAttackType(string ...$attackTypes): self {
+		$this->attackTypes = $attackTypes;
 
 		return $this;
 	}
@@ -43,16 +44,27 @@ class CharacterBuilder {
 	}
 
 	public function buildCharacter(): Character {
+		$attackTypes = array_map(
+			fn(string $attackType) => $this->createAttackType($attackType),
+			$this->attackTypes
+		);
+
+		if (count($attackTypes) === 1) {
+			$attackType = $attackTypes[0];
+		} else {
+			$attackType = new MultiAttackType($attackTypes);
+		}
+
 		return new Character(
 			$this->maxHealth,
 			$this->baseDamage,
 			$this->createArmorType(),
-			$this->createAttackType()
+			$attackType
 		);
 	}
 
-	private function createAttackType(): AttackType {
-		return match ($this->attackType) {
+	private function createAttackType(string $attackType): AttackType {
+		return match ($attackType) {
 			'bow' => new BowType(),
 			'fire_bolt' => new FireboltType(),
 			'sword' => new TwoHandedSwordType(),
