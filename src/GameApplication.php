@@ -5,6 +5,7 @@ namespace App;
 use App\AttackType\BowType;
 use App\AttackType\FireboltType;
 use App\AttackType\TwoHandedSwordType;
+use App\AttackType\MultiAttackType;
 use App\Character\Character;
 
 class GameApplication {
@@ -41,6 +42,7 @@ class GameApplication {
 			'fighter' => new Character(90, 12, 0.25, new TwoHandedSwordType()),
 			'archer' => new Character(80, 10, 0.15, new BowType()),
 			'mage' => new Character(70, 8, 0.10, new FireboltType()),
+			'mage_archer' => new Character(75, 9, 0.15, new MultiAttackType([new FireboltType(), new BowType()])),
 			default => throw new \RuntimeException('Undefined Character'),
 		};
 	}
@@ -50,6 +52,7 @@ class GameApplication {
 			'fighter',
 			'mage',
 			'archer',
+			'mage_archer'
 		];
 	}
 
