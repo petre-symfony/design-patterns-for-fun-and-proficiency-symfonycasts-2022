@@ -14,7 +14,7 @@ use App\AttackType\TwoHandedSwordType;
 use App\Character\Character;
 use Psr\Log\LoggerInterface;
 
-class CharacterBuilder implements CharacterBuilderInterface{
+class CharacterBuilder {
 	private int $maxHealth;
 	private int $baseDamage;
 	private array $attackTypes;

@@ -9,10 +9,6 @@ class CharacterBuilderFactory {
 	}
 
 	public function createBuilder(): CharacterBuilder{
-		if ($this->someConfig) {
-			return new CharacterBuilder($this->logger);
-		} else {
-			// other character builder
-		}
+		return new CharacterBuilder($this->logger);
 	}
 }
