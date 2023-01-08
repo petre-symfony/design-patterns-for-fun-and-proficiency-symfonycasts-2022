@@ -12,6 +12,8 @@ class Character {
 	private int $currentStamina = self::MAX_STAMINA;
 	private int $currentHealth;
 	private string $nickname = '';
+	private int $level = 1;
+	private int $xp = 0;
 
 	public function __construct(
 		private int   $maxHealth,
@@ -55,6 +57,27 @@ class Character {
 		$this->nickname = $nickname;
 	}
 
+	public function addXp(int $xpEarned):int {
+		$this->xp += $xpEarned;
+
+		return $this->xp;
+	}
+
+	public function getLevel():int {
+		return $this->level;
+	}
+
+	public function levelUp():void {
+		//+15% bonus to stats
+		$bonus = 1.15;
+
+		$this->level++;
+		$this->maxHealth = floor($this->maxHealth * $bonus);
+		$this->baseDamage = floor($this->baseDamage * $bonus);
+
+		//todo: level up attack and armor type
+	}
+	
 	/**
 	 * Restore player's health before next fight
 	 */
