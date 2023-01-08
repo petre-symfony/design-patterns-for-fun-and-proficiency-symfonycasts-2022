@@ -57,6 +57,10 @@ class Character {
 		$this->nickname = $nickname;
 	}
 
+	public function getXp(): int{
+		return $this->xp;
+	}
+
 	public function addXp(int $xpEarned):int {
 		$this->xp += $xpEarned;
 
@@ -77,7 +81,7 @@ class Character {
 
 		//todo: level up attack and armor type
 	}
-	
+
 	/**
 	 * Restore player's health before next fight
 	 */

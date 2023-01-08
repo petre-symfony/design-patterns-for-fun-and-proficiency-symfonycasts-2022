@@ -88,7 +88,7 @@ class GameApplication {
 	}
 
 	public function unsubscribe(GameObserverInterface $observer): void{
-		$key = array_search($observer, $this->observers);
+		$key = array_search($observer, $this->observers, true);
 
 		if ($key !== false){
 			unset($this->observers[$key]);
