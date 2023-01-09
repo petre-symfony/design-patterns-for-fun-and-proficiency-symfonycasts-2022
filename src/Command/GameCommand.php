@@ -29,6 +29,7 @@ class GameCommand extends Command {
 		$io = new SymfonyStyle($input, $output);
 		$this->eventDispatcher->addListener(FightStartingEvent::class, function(FightStartingEvent $event) use ($io){
 			$io->note('Fight is starting against ' . $event->ai->getNickname());
+			$event->shouldBattle = false;
 		});
 
 		$io->text('Welcome to the game where warriors fight against each other for honor and glory... and 🍕!');
