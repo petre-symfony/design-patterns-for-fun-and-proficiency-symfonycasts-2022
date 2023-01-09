@@ -22,10 +22,6 @@ class GameCommand extends Command {
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output): int {
-		$xpObserver = new XpEarnedObserver(
-			new XpCalculator()
-		);
-		$this->game->subscribe($xpObserver);
 
 		$io = new SymfonyStyle($input, $output);
 
