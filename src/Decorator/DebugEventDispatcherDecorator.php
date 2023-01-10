@@ -3,14 +3,16 @@
 namespace App\Decorator;
 
 
+use Symfony\Component\DependencyInjection\Attribute\AsDecorator;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
+#[AsDecorator('event_dispatcher')]
 class DebugEventDispatcherDecorator implements EventDispatcherInterface {
 	public function __construct(private readonly EventDispatcherInterface $eventDispatcher) {
 	}
 
-	public function addListener(string $eventName, callable $listener, int $priority = 0) {
+	public function addListener(string $eventName, $listener, int $priority = 0) {
 		$this->eventDispatcher->addListener($eventName, $listener, $priority);
 	}
 
